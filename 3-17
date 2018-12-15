@@ -1,0 +1,50 @@
+//Дан массив размером п*п (если не оговорено иначе), элементы которого целые
+//числа
+//Определить, есть ли в данном массиве строка, состоящая только из положительных
+//элементов
+#include <iostream>
+using namespace std;
+int main()
+{
+	int n, k;
+	cout << "n = ";
+	cin >> n;
+	int **mas = new int *[n];
+	for ( int i = 0; i < n; ++i)
+	{
+		mas[i] = new int [n];
+	}
+	for (int i = 0; i < n; ++i)
+	{
+		for (int j = 0; j < n; ++j)
+		{
+			cout << "mas[" << i << "][" << j <<"] = ";
+			cin >> mas[i][j];
+		}
+	}
+	bool flag = false;
+	k = 0;
+	for (int i = 0; i < n; ++i)
+	{
+		for (int j = 0; j < n; ++j)
+		{
+			if (mas[i][j] >= 0)
+			{
+				flag = true;
+			}
+			else
+			{
+				flag = false;
+				break;
+			}
+
+		}
+		if (flag == true)
+						k++;
+	}
+	if (k > 0)
+		cout << "True";
+	else
+		cout <<"j";
+	return 0;
+}
