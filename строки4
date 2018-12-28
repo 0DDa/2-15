@@ -1,0 +1,23 @@
+#include <iostream>
+#include <string>
+using namespace std;
+int main() {
+	string s;
+	string razdel = ".,?! ";
+	cout << "Enter string\n";
+	getline (cin, s);
+	int count = 0;
+	char f;
+	for (unsigned int i = 0; i < s.length(); i++)
+	{
+		f = s[i];
+		count++;
+		for (unsigned int j = 0; j < s.length(); j++)
+		{
+			if (f == s[j])
+			s[j] = s[j+1];
+		}
+	}
+	cout << count << endl;
+	return 0;
+}
