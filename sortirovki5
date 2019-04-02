@@ -95,14 +95,13 @@ bool operator > (people a, people b) {//переопределяем опера�
  
 int main() {
     setlocale(LC_ALL,"rus");
-    in.open("D:/С++ мой/сортировка.txt");
-    out.open("Готово.txt");
+    r.open("in.txt");
     vector<people> x;
     x = inFile();
     heap_sort(x,(int)x.size());
     for (int i = 0; i << x.size(); i++)
         print(x[i]);
-    in.close();
-    out.close();
+    r.close();
+    w.close();
     return 0;
 }
