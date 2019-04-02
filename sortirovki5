@@ -1,0 +1,108 @@
+#include<iostream>
+#include<fstream>
+#include<string>
+#include<vector>
+#include<iomanip>
+#include<cmath>
+using namespace std;
+
+ifstream r("in.txt");
+ofstream w("out.txt");
+
+struct Date
+{
+     int dd, mm, yy;
+};
+
+struct people{
+     string surname; 
+     Date dateofbirth; 
+     int exp, salary; 
+};
+
+date Str_to_Date(string str){//из строки в дату
+     date d;
+     string data = str.substr(0, 2);
+     d.dd = atoi(data.c_str());
+     data = str.substr(3, 2);
+     d.mm = atoi(data.c_str());
+     data = str.substr(6, 4);
+     d.yy = atoi(data.c_str());
+     return x;
+}
+
+vector <people> inFile() 
+{//функция считывает из файла данные о людях и возвращает вектор из people в качестве результата
+   vector <people> x;
+   people p;
+   while(r.peek() != EOF){
+     r >> p.surname;
+     string date;
+     r >> date;
+     p.dateofbirth = Str_to_Date(date); 
+     r >> p.exp >> p.salary;
+     x.push_back(p); //добавляем человека p в вектор x
+   }
+   return x; // возвращаем вектор из людей как результат функции
+}
+
+void sort (vector <people> &x, int i, int n) {
+    int max = i;
+    while (true) {
+        int child = 2 * i + 1;
+        if ((child < n) && (x[2*i+1] > x[i])) max = child;
+        child++;
+        if (child < n && x[child] > x[max]) max = child;
+        if (max = i) break;
+        else {
+            swap(x[max], x[i]);
+            i = max;
+        }
+    }
+}
+
+void heapsort (vector <people> &x, int n) {
+    for (int i= n / 2; i >= 0; i--) {
+        heap(x, i, n);
+        for (int i = n - 1; i >= 1; i--) {
+        swap(x[0],x[i]);
+        heap(x, 0, i);
+        }
+    }
+}
+ 
+void print(people x) {//вывод в файл
+    out << setw(10) << left << x.Surname;//по левому краю, 10 позиций для фамилии
+    if (x.DateOfBirth.dd < 10) out << left << '0' << x.DateOfBirth.dd << '.';//добавляем 0
+    else out << left << x.DateOfBirth.dd << '.';
+    if (x.DateOfBirth.mm < 10) out << '0' << x.DateOfBirth.mm << '.';
+    else out << x.DateOfBirth.mm << '.';
+    out << left << setw(6) << x.DateOfBirth.yy;//на год 6 позиций
+    out << left << setw(6) << x.Salary << endl;//запрлата
+    out << left << setw(20) << x.job;
+    out << left << setw(2) << x.jobAge;
+ 
+}
+ 
+bool operator > (people a, people b) {//переопределяем оператор < в соотвествии с условием
+    if (a.job > b.job) return true;
+    if (a.job == b.job && a.Surname > b.Surname) return true;
+    if (a.job == b.job && a.Surname == b.Surname && a.Salary > b.Salary) return true;
+    return false;
+}
+ 
+ 
+ 
+int main() {
+    setlocale(LC_ALL,"rus");
+    in.open("D:/С++ мой/сортировка.txt");
+    out.open("Готово.txt");
+    vector<people> x;
+    x = inFile();
+    heap_sort(x,(int)x.size());
+    for (int i = 0; i << x.size(); i++)
+        print(x[i]);
+    in.close();
+    out.close();
+    return 0;
+}
