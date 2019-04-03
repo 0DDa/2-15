@@ -1,0 +1,86 @@
+#include "pch.h"
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <stdlib.h>
+using namespace std;
+
+struct date 
+{ int day, month, year; }
+
+struct pacienthome
+{
+	string town, street, house; int flat;
+};
+
+struct pacient
+{
+	string surname, name, patronymic;
+	string gender;
+	date dateofbirth;
+	int phone;
+	pacienthome home;
+	int medkarta;
+	int bloodgroup;
+};
+
+date STR_date(string tmp)
+{
+	date data;
+
+		string temp = tmp.substr(0, 2);
+		data.day = atoi(temp.c_str());
+		temp = tmp.substr(3, 2);
+		data.month = atoi(temp.c_str());
+		temp = tmp.substr(6, 4);
+		data.year = atoi(temp.c_str());
+		return data;
+}
+
+
+int main() {
+	ifstream e("f.txt");
+	ofstream o("f1.txt");
+	e >> today >> tomonth >> toyear;
+  string today;
+  e >> today;
+  Date today1;
+	today1 = STR_date (today);
+
+	pacient a[30];
+
+	int i = 0;
+	while (e.peek() != EOF)
+	{
+		string tmp;
+		e >> a[i].surname >> a[i].name >> a[i].patronymic >> a[i].gender >> tmp
+    a[i].date = STR_date(tmp);
+    e >> a[i].phone >> a[i].home >> a[i].medkarta;
+		i++;
+		if (toyear - a[i].dateofbirth.day > 50)
+		{
+			o << a[i].name << a[i].surname << a[i].patronymic << a[i].gender << a[i]dateofbirth << a[i].medkarta << int bloodgroup;
+		}
+		else if (toyear - a[i].dateofbirth.day == 50)
+		{
+			if (today1.month > a[i].dateofbirth.month)
+			{
+				o << a[i].name << a[i].surname << a[i].patronymic << a[i].gender << a[i].dateofbirth << a[i].phone << a[i].home << a[i].medkarta << int bloodgroup;
+			}
+			else if (today1.month == a[i].dateofbirth.month)
+			{
+				if (today1.day >= a[i].dateofbirth.day)
+				{
+					o << a[i].name << a[i].surname << a[i].patronymic << a[i].gender << a[i].dateofbirth << a[i].phone << a[i].home << a[i].medkarta << int bloodgroup;
+				}
+			}
+		}
+	}
+
+
+
+	e.close();
+	o.close();
+
+	return 0;
+}
